@@ -23,19 +23,25 @@
 
 | Epoch | Loss ↓ | CER ↓ | EM ↑ |
 |---:|---:|---:|---:|
-| 1 | 10.4009 | 1.0000 | 0.0000 |
-| 2 | 4.2095 | 1.0000 | 0.0000 |
-| 3 | 4.0276 | 1.0000 | 0.0000 |
-| 4 | 3.9725 | 1.0000 | 0.0000 |
-| 5 | **3.9215** | **1.0000** | **0.0000** |
+| 1 | 5.5162 | 1.0000 | 0.0000 |
+| 2 | 3.9555 | 1.0000 | 0.0000 |
+| 3 | 3.8255 | 0.9571 | 0.0100 |
+| 4 | 3.6886 | 0.8976 | 0.0150 |
+| 5 | 3.6238 | 0.9267 | 0.0050 |
+| 6 | 3.5572 | 0.9198 | 0.0200 |
+| 7 | 3.4935 | 0.9046 | 0.0300 |
+| 8 | 3.4548 | 0.8935 | 0.0300 |
+| 9 | 3.3868 | 0.8658 | 0.0350 |
+| 10 | **3.3273** | **0.8409** | **0.0600** |
 
 ### Result
 
-- Loss: **10.4009 → 3.9215** (**62.3% ↓**)
-- CER: **1.0000**
-- Exact Match: **0.0000**
-- Training loss decreased substantially, but recognition quality did not improve.
-- Further investigation is required for label encoding, CTC decoding, vocabulary mapping, data size, and training duration.
+- Loss: **5.5162 → 3.3273** (**39.7% ↓**)
+- CER: **1.0000 → 0.8409** (**15.9% improvement**)
+- Exact Match: **0.0000 → 0.0600**
+- Best Epoch: **10**
+- Unlike the previous 5-epoch experiment, the model now shows clear improvement in both CER and EM.
+- Recognition quality is still relatively low, but the model is successfully learning character-level recognition.
 
 ---
 
@@ -78,7 +84,6 @@
 - **Similarity:** 0.0077 → 0.0085 (**10.39% improvement**)
 - **EM:** 0.0000 → 0.0000 (no improvement)
 - Fine-tuning improved CER and similarity, but absolute OCR performance remains very low.
-- The result indicates that the model learned from fine-tuning, but has not yet reached usable OCR quality.
 
 ---
 
@@ -87,7 +92,8 @@
 | Task | Model | Main Metric | Result |
 |---|---|---|---|
 | Detection | Mini DBNet | Pixel IoU ↑ | **0.5781 best** |
-| Recognition | SVTR-LCNet | CER ↓ / EM ↑ | **1.0000 / 0.0000** |
+| Recognition | SVTR-LCNet | CER ↓ | **1.0000 → 0.8409** |
+| Recognition | SVTR-LCNet | EM ↑ | **0.0000 → 0.0600** |
 | Unwarping | Mini UVDoc | L1 ↓ | **10.87% improvement** |
 | Unwarping | Mini UVDoc | PSNR ↑ | **+0.655 dB** |
 | Unwarping | Mini UVDoc | SSIM ↑ | **+0.0385** |
@@ -97,6 +103,6 @@
 ## Conclusion
 
 - **Detection:** Mini DBNet successfully learned text-region detection, reaching a best Pixel IoU of **0.5781**.
-- **Recognition:** SVTR-LCNet training loss decreased by **62.3%**, but CER and EM showed no improvement, indicating that the recognition setup requires further investigation.
-- **Unwarping:** Mini UVDoc successfully improved all reconstruction metrics, with **10.87% lower L1**, **+0.655 dB PSNR**, and **+0.0385 SSIM**.
-- **End-to-End OCR:** MinerU2.5 fine-tuning reduced CER by **14.45%** and improved similarity by **10.39%**, but absolute OCR accuracy remained poor.
+- **Recognition:** SVTR-LCNet now shows clear learning. CER improved from **1.0000 to 0.8409**, while EM increased from **0% to 6%**. Performance is still limited, but the model is successfully learning the recognition task.
+- **Unwarping:** Mini UVDoc improved all reconstruction metrics, achieving **10.87% lower L1**, **+0.655 dB PSNR**, and **+0.0385 SSIM**.
+- **End-to-End OCR:** MinerU2.5 fine-tuning reduced CER by **14.45%** and improved similarity by **10.39%**, although absolute OCR performance remains poor.
