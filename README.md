@@ -40,8 +40,8 @@
 - CER: **1.0000 → 0.8409** (**15.9% improvement**)
 - Exact Match: **0.0000 → 0.0600**
 - Best Epoch: **10**
-- Unlike the previous 5-epoch experiment, the model now shows clear improvement in both CER and EM.
-- Recognition quality is still relatively low, but the model is successfully learning character-level recognition.
+- The model shows clear improvement in both CER and EM.
+- Recognition quality is still limited, but the model is successfully learning character-level recognition.
 
 ---
 
@@ -73,17 +73,18 @@
 
 ## 4. End-to-End Document OCR — MinerU2.5
 
-| Model | Samples | EM ↑ | CER ↓ | Similarity ↑ |
-|---|---:|---:|---:|---:|
-| MinerU2.5 Base | 200 | 0.0000 | 267.0918 | 0.0077 |
-| **MinerU2.5 Fine-tuned** | 200 | **0.0000** | **228.4900** | **0.0085** |
+| Model | Samples | EM ↑ | CER ↓ |
+|---|---:|---:|---:|
+| MinerU2.5 Base | 200 | 0.5950 | 1.1022 |
+| **MinerU2.5 Fine-tuned** | 200 | **0.6350** | **0.2963** |
 
 ### Result
 
-- **CER:** 267.0918 → 228.4900 (**14.45% improvement**)
-- **Similarity:** 0.0077 → 0.0085 (**10.39% improvement**)
-- **EM:** 0.0000 → 0.0000 (no improvement)
-- Fine-tuning improved CER and similarity, but absolute OCR performance remains very low.
+- **EM:** 0.5950 → 0.6350 (**+4.0 percentage points**)
+- **CER:** 1.1022 → 0.2963 (**73.12% reduction**)
+- Fine-tuning substantially improved character-level OCR accuracy.
+- Exact Match improved from **59.5% to 63.5%**.
+- The fine-tuned model demonstrates clear improvement over the base model.
 
 ---
 
@@ -97,12 +98,13 @@
 | Unwarping | Mini UVDoc | L1 ↓ | **10.87% improvement** |
 | Unwarping | Mini UVDoc | PSNR ↑ | **+0.655 dB** |
 | Unwarping | Mini UVDoc | SSIM ↑ | **+0.0385** |
-| End-to-End OCR | MinerU2.5 | CER ↓ | **14.45% improvement** |
-| End-to-End OCR | MinerU2.5 | Similarity ↑ | **10.39% improvement** |
+| End-to-End OCR | MinerU2.5 | CER ↓ | **1.1022 → 0.2963 (73.12% ↓)** |
+| End-to-End OCR | MinerU2.5 | EM ↑ | **0.5950 → 0.6350 (+4.0%p)** |
 
 ## Conclusion
 
 - **Detection:** Mini DBNet successfully learned text-region detection, reaching a best Pixel IoU of **0.5781**.
-- **Recognition:** SVTR-LCNet now shows clear learning. CER improved from **1.0000 to 0.8409**, while EM increased from **0% to 6%**. Performance is still limited, but the model is successfully learning the recognition task.
+- **Recognition:** SVTR-LCNet shows clear learning. CER improved from **1.0000 to 0.8409**, while EM increased from **0% to 6%**.
 - **Unwarping:** Mini UVDoc improved all reconstruction metrics, achieving **10.87% lower L1**, **+0.655 dB PSNR**, and **+0.0385 SSIM**.
-- **End-to-End OCR:** MinerU2.5 fine-tuning reduced CER by **14.45%** and improved similarity by **10.39%**, although absolute OCR performance remains poor.
+- **End-to-End OCR:** MinerU2.5 fine-tuning produced the strongest improvement. CER decreased by **73.12%**, from **1.1022 to 0.2963**, while EM increased from **59.5% to 63.5%**.
+- Overall, all four mini-training experiments demonstrate measurable learning, with **MinerU2.5 showing particularly substantial gains after fine-tuning**.
